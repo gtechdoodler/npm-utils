@@ -1,0 +1,36 @@
+{
+  "name": "bem-it",
+  "version": "0.0.1",
+  "description": "A BEM util to help with consistent element class naming in components.",
+  "main": "dist/BemIt.min.js",
+  "scripts": {
+    "compile:ts": "tsc",
+    "prebuild": "rimraf ./dist",
+    "build": "npm run compile:ts",
+    "postbuild": "npm run uglify",
+    "uglify": "uglifyjs ./dist/bem-it.js -mc -o ./dist/bem-it.min.js",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtechdoodler/npm-utils.git"
+  },
+  "keywords": [
+    "BEM",
+    "class",
+    "className",
+    "block",
+    "element",
+    "modifier"
+  ],
+  "author": "Mark Graham (gtechdoodler)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gtechdoodler/npm-utils/issues"
+  },
+  "homepage": "https://github.com/gtechdoodler/npm-utils#readme",
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "uglify-js": "^3.12.5"
+  }
+}
