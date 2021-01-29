@@ -33,6 +33,14 @@ test('Outputs multiple modifiers', () => {
     `${block}__${element} ${block}__${element}--${modifier1} ${block}__${element}--${modifier2}`);
 });
 
+test('Empty modifier', () => {
+  const block = 'Block';
+  const bem = new BemIt(block);
+  const element = 'Element';
+  const modifier = '';
+  expect(bem.el(element).mod(modifier)).toEqual(`${block}__${element}`);
+});
+
 test('Clear after val', () => {
   const block = 'Block';
   const bem = new BemIt(block);

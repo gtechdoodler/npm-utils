@@ -14,16 +14,18 @@ export default class BemIt {
   }
 
   public mod(val: string | string[]): string {
-    const fullMod = (v: string): string => {
-      return `${this._value}${v ? `--${v}` : '' }`;
+    if (val) {
+      const fullMod = (v: string): string => {
+        return `${this._value}${v ? `--${v}` : '' }`;
+      }      
+      const ret = `${this._value} ${Array.isArray(val)
+        ? val.map(m => fullMod(m)).join(' ')
+        : `${fullMod(val)}`}`;
+      
+      this._value = this._block;
+      return ret;
     }
-
-    const ret = `${this._value} ${Array.isArray(val)
-      ? val.map(m => fullMod(m)).join(' ')
-      : `${fullMod(val)}`}`;
-    
-    this._value = this._block;
-    return ret;
+    return this._value;
   }
 
   public get val(): string {
