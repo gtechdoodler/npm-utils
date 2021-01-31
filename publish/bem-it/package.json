@@ -1,6 +1,6 @@
 {
   "name": "@gtechdoodler/bem-it",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A BEM util to help with consistent element class naming in components.",
   "main": "dist/bem-it.min.js",
   "types": "dist/bem-it.d.ts",
@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/gtechdoodler/npm-utils#readme",
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "rimraf": "^3.0.2",
     "uglify-js": "^3.12.5"
   }
