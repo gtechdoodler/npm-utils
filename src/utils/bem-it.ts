@@ -1,3 +1,20 @@
+export class Output {
+
+  private _lastBemIt: BemIt;
+
+  constructor(lastBemIt: BemIt) {
+    this._lastBemIt = lastBemIt;
+  }
+
+  get out(): string {
+    return this._lastBemIt.out;
+  }
+
+  get and(): BemIt {
+    return new BemIt(this._lastBemIt);
+  }
+}
+
 export default class BemIt {
 
   private _block: string = '';
@@ -46,19 +63,11 @@ export default class BemIt {
     return this;
   }
 
-  public mod(modifier: string | undefined | null): any {
+  public mod(modifier: string | undefined | null): Output {
     modifier = modifier?.trim();
     if (modifier) {
       this._fullBem = `${this._fullBem} ${this._fullBem}${`--${modifier}`}`;
     }
-    return {
-      lastBem: this,
-      get and(): BemIt {
-        return new BemIt(this.lastBem);
-      },
-      get out(): string {
-        return this.lastBem.out;
-      }      
-    }
+    return new Output(this);
   }
 }
