@@ -63,11 +63,34 @@ export default class BemIt {
     return this;
   }
 
-  public mod(modifier: string | undefined | null): Output {
-    modifier = modifier?.trim();
+  public mod(modifier: string | string[] | object | undefined | null): Output {
+    const modStr = (val: string) => {
+      val = val.trim();
+      return val ? `${this._fullBem}${`--${val}`}` : undefined;
+    };
+    
     if (modifier) {
-      this._fullBem = `${this._fullBem} ${this._fullBem}${`--${modifier}`}`;
+      if (typeof modifier === 'string') {
+        modifier = modStr(modifier);
+      } else if (Array.isArray(modifier)) {
+        modifier = modifier.map(m => modStr(m)).join(' ');
+      } else {
+        const arr: string[] = [];
+        Object.entries(modifier).forEach(
+          ([key, value]) => {
+            if (value) {
+              arr.push(key);
+            }
+          }
+        )
+        if (arr.length) {
+          modifier = arr.map(m => modStr(m)).join(' ');
+        }
+      }
+
+      if (modifier) this._fullBem = `${this._fullBem} ${modifier}`;
     }
+
     return new Output(this);
   }
 }

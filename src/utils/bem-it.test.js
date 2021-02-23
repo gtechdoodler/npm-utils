@@ -78,6 +78,32 @@ test('Multiple elements with modifier.', () => {
     `${block}__${element1}__${element2} ${block}__${element1}__${element2}--${modifier}`);
 });
 
+test(`Object mods.`, () => {
+  const
+  block = 'Block',
+  element = 'element',
+  modifier1 = 'modifier1',
+  modifier2 = 'modifier2';
+
+  const bem = new BemIt(block);
+
+  expect(bem.el(element).mod({ modifier1: true, modifier2: true }).out).toEqual(
+    `${block}__${element} ${block}__${element}--${modifier1} ${block}__${element}--${modifier2}`);
+});
+
+test(`String array mods.`, () => {
+  const
+  block = 'Block',
+  element = 'element',
+  modifier1 = 'modifier1',
+  modifier2 = 'modifier2';
+
+  const bem = new BemIt(block);
+
+  expect(bem.el(element).mod([ modifier1, modifier2 ]).out).toEqual(
+    `${block}__${element} ${block}__${element}--${modifier1} ${block}__${element}--${modifier2}`);
+});
+
 test(`Calling 'out' resets value back to block.`, () => {
   const
   block = 'Block',
