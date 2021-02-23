@@ -69,26 +69,24 @@ export default class BemIt {
       return val ? `${this._fullBem}${`--${val}`}` : undefined;
     };
     
-    if (modifier) {
-      if (typeof modifier === 'string') {
-        modifier = modStr(modifier);
-      } else if (Array.isArray(modifier)) {
-        modifier = modifier.map(m => modStr(m)).join(' ');
-      } else {
-        const arr: string[] = [];
-        Object.entries(modifier).forEach(
-          ([key, value]) => {
-            if (value) {
-              arr.push(key);
-            }
+    if (typeof modifier === 'string') {
+      modifier = modStr(modifier);
+    } else if (Array.isArray(modifier)) {
+      modifier = modifier.map(m => modStr(m)).join(' ');
+    } else if (modifier) {
+      const arr: string[] = [];
+      Object.entries(modifier).forEach(
+        ([key, value]) => {
+          if (value) {
+            arr.push(key);
           }
-        )
-        if (arr.length) {
-          modifier = arr.map(m => modStr(m)).join(' ');
         }
-      }
+      )
+      modifier = arr.map(m => modStr(m)).join(' ');
+    }
 
-      if (modifier) this._fullBem = `${this._fullBem} ${modifier}`;
+    if (modifier) {
+      this._fullBem = `${this._fullBem} ${modifier}`;
     }
 
     return new Output(this);

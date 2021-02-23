@@ -91,6 +91,19 @@ test(`Object mods.`, () => {
     `${block}__${element} ${block}__${element}--${modifier1} ${block}__${element}--${modifier2}`);
 });
 
+test(`Object mods, all falsy.`, () => {
+  const
+  block = 'Block',
+  element = 'element',
+  modifier1 = 'modifier1',
+  modifier2 = 'modifier2';
+
+  const bem = new BemIt(block);
+
+  expect(bem.el(element).mod({ modifier1: false, modifier2: false }).out).toEqual(
+    `${block}__${element}`);
+});
+
 test(`String array mods.`, () => {
   const
   block = 'Block',
