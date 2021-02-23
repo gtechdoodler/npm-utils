@@ -1,8 +1,7 @@
 # bem-it
 
 A simple js object providing BEM class naming support and consistency for an individual or software team.
-The goal was to create something that providing consistent naming, and also an easy to implement assertion
-library style api that didn't bloat a component.
+Provides consistent BEM class names, and a clean api that doesn't bloat a component with untidy string concatenations.
 
 The code has been thoroughly tested and test scripts are available, with source, in the npm-utils project in
 [github](https://github.com/gtechdoodler/npm-utils). If you discover any bugs then

@@ -117,6 +117,17 @@ test(`String array mods.`, () => {
     `${block}__${element} ${block}__${element}--${modifier1} ${block}__${element}--${modifier2}`);
 });
 
+test(`String array mods, all falsy.`, () => {
+  const
+  block = 'Block',
+  element = 'element';
+
+  const bem = new BemIt(block);
+
+  expect(bem.el(element).mod([ '', undefined ]).out).toEqual(
+    `${block}__${element}`);
+});
+
 test(`Calling 'out' resets value back to block.`, () => {
   const
   block = 'Block',
