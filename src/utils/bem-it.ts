@@ -97,3 +97,23 @@ export default class BemIt {
     return new Output(this);
   }
 }
+
+interface addClassReturn {
+  before: (bem: BemIt) => string;
+  after: (bem: BemIt) => string;
+}
+
+export function addClass(name: string | null | undefined): addClassReturn {
+  name = name ? name.trim() : undefined;
+
+  return {
+    
+    before: function(bem: BemIt): string {
+      return `${name ? `${name} ` : ''}${bem.out}`;
+    },
+
+    after: function (bem: BemIt): string {
+      return `${bem.out}${name ? ` ${name}` : ''}`;
+    }
+  }
+}

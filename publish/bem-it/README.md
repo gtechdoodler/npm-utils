@@ -85,9 +85,74 @@ Notice we are following the official [BEM](http://getbem.com/) standard here, ou
 additional Block__element--modifier to represent the modifier.
 
 
+### Multiple Modifiers as Array
+
+For ternary operand false, pass an empty string, undefined, or null. This will ensure the exclusion of the modifier.
+
+```js
+export default function({isFullScreen, isLoading, ...props}) {
+  const bem = new BemIt('Container');
+  const className = bem.mod([
+    isFullScreen ? 'full-screen' : '',
+    isLoading ? 'loading' : ''
+  ]).out;
+
+  return (
+    <div className={className}>
+    </div>
+  )
+}
+```
+
+
+### Multiple Modifiers as Object
+
+Anything falsy will be ignored.
+
+```js
+export default function({isFullScreen, isLoading, ...props}) {
+  const bem = new BemIt('Container');
+  const className = bem.mod({
+    'full-screen' isFullScreen,
+    'loading': isLoading
+  }).out;
+
+  return (
+    <div className={className}>
+    </div>
+  )
+}
+```
+
+
+### Include a Custom Class Name Passed as a Prop
+
+To combine a class name passed as a prop, with bem output, you can import a function called `addClass`.
+
+```js
+import BemIt, { addClass } from '@gtechdoodler/bem-it';
+```
+
+And implement as follows:
+
+```js
+export default function({className, ...props}) {
+  const bem = new BemIt('Container');
+
+  return (
+    <div className={addClass(className).before(bem)}>
+    </div>
+  )
+}
+```
+
+If the className is falsy then it will be ignored, outputting only the bem class name. Also, you can flip the
+class names around, adding a custom class after a bem output, by calling `addClass(className).after(bem)`.
+
+
 ### Multiple Classes With a Single Statement
 
-If you really must represent an element with mutiple class names, this is achieveable with chaining. Just call `and`.
+If you really must represent an element with mutiple class names, this is achieveable with chaining. Call `and`.
 
 ```js
 export default function() {
@@ -107,11 +172,9 @@ Calling `bem.el('content').and.el('detail').out` will output: **Container__conte
 
 ## TypeScript Declarations
 
-These are exported, so if you're using TypeScript then have a play around... the api is light and most of it is
-chainable. So, if you want something wacky like:
+These are exported, so if you're using TypeScript then have a play around... the api is light and chainable,
+so, if you want something wacky like:
 
 `bem.el('content').mod('show').and.el('content').el('summary').mod('highlight').out`
 
-then it will work. It really isn't recommended, but it will work. By the way, that would output:
-
-**Container__content Container__content--show Container__content__summary Container__content__summary--highlight**
+But please don't write code like this :).

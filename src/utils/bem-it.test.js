@@ -1,4 +1,4 @@
-import BemIt from './bem-it';
+import BemIt, { addClass } from './bem-it';
 
 test('Output a block.', () => {
   const blockString = 'Block';
@@ -227,4 +227,36 @@ test(`Edge case, mixed.`, () => {
   const block = 'Block';
   const bem = new BemIt(block);
   expect(bem.el('').el(null).mod(undefined).out).toEqual(`${block}`);
+});
+
+test(`addClass().before()`, () => {
+  const block = 'Block';
+  const customClassName = 'CustomClassName';
+  const bem = new BemIt(block);
+  const className = addClass(customClassName).before(bem);
+  expect(className).toEqual(`${customClassName} ${block}`);
+});
+
+test(`addClass().after()`, () => {
+  const block = 'Block';
+  const customClassName = 'CustomClassName';
+  const bem = new BemIt(block);
+  const className = addClass(customClassName).after(bem);
+  expect(className).toEqual(`${block} ${customClassName}`);
+});
+
+test(`Edge case, addClass undefined.`, () => {
+  const block = 'Block';
+  const customClassName = undefined;
+  const bem = new BemIt(block);
+  const className = addClass(customClassName).after(bem);
+  expect(className).toEqual(`${block}`);
+});
+
+test(`Edge case, addClass string spaces only.`, () => {
+  const block = 'Block';
+  const customClassName = '  ';
+  const bem = new BemIt(block);
+  const className = addClass(customClassName).after(bem);
+  expect(className).toEqual(`${block}`);
 });
