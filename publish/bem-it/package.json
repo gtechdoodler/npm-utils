@@ -1,6 +1,6 @@
 {
   "name": "@gtechdoodler/bem-it",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "description": "A BEM util to help with consistent element class naming in components.",
   "main": "dist/bem-it.min.js",
   "types": "dist/bem-it.d.ts",
@@ -22,7 +22,8 @@
     "className",
     "block",
     "element",
-    "modifier"
+    "modifier",
+    "bemit"
   ],
   "author": "Mark Graham (gtechdoodler)",
   "license": "MIT",

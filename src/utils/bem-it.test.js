@@ -245,6 +245,15 @@ test(`addClass().after()`, () => {
   expect(className).toEqual(`${block} ${customClassName}`);
 });
 
+test(`addClass().after(), with after receiving mod Output obj.`, () => {
+  const block = 'Block';
+  const modifier = 'modifier';
+  const customClassName = 'CustomClassName';
+  const bem = new BemIt(block);
+  const className = addClass(customClassName).after(bem.mod(modifier));
+  expect(className).toEqual(`${block} ${block}--${modifier} ${customClassName}`);
+});
+
 test(`Edge case, addClass undefined.`, () => {
   const block = 'Block';
   const customClassName = undefined;

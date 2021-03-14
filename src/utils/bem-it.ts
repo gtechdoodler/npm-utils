@@ -108,11 +108,11 @@ export function addClass(name: string | null | undefined): addClassReturn {
 
   return {
     
-    before: function(bem: BemIt): string {
+    before: function(bem: BemIt | Output): string {
       return `${name ? `${name} ` : ''}${bem.out}`;
     },
 
-    after: function (bem: BemIt): string {
+    after: function (bem: BemIt | Output): string {
       return `${bem.out}${name ? ` ${name}` : ''}`;
     }
   }
