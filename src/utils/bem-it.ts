@@ -99,8 +99,8 @@ export default class BemIt {
 }
 
 interface addClassReturn {
-  before: (bem: BemIt) => string;
-  after: (bem: BemIt) => string;
+  before: (bem: BemIt | Output) => string;
+  after: (bem: BemIt | Output) => string;
 }
 
 export function addClass(name: string | null | undefined): addClassReturn {

@@ -229,7 +229,7 @@ test(`Edge case, mixed.`, () => {
   expect(bem.el('').el(null).mod(undefined).out).toEqual(`${block}`);
 });
 
-test(`addClass().before()`, () => {
+test(`addClass before.`, () => {
   const block = 'Block';
   const customClassName = 'CustomClassName';
   const bem = new BemIt(block);
@@ -237,7 +237,7 @@ test(`addClass().before()`, () => {
   expect(className).toEqual(`${customClassName} ${block}`);
 });
 
-test(`addClass().after()`, () => {
+test(`addClass after.`, () => {
   const block = 'Block';
   const customClassName = 'CustomClassName';
   const bem = new BemIt(block);
@@ -245,7 +245,7 @@ test(`addClass().after()`, () => {
   expect(className).toEqual(`${block} ${customClassName}`);
 });
 
-test(`addClass().after(), with after receiving mod Output obj.`, () => {
+test(`addClass after, with after receiving result from mod call.`, () => {
   const block = 'Block';
   const modifier = 'modifier';
   const customClassName = 'CustomClassName';
@@ -254,7 +254,15 @@ test(`addClass().after(), with after receiving mod Output obj.`, () => {
   expect(className).toEqual(`${block} ${block}--${modifier} ${customClassName}`);
 });
 
-test(`Edge case, addClass undefined.`, () => {
+test(`addClass edge case, empty string.`, () => {
+  const block = 'Block';
+  const customClassName = '';
+  const bem = new BemIt(block);
+  const className = addClass(customClassName).after(bem);
+  expect(className).toEqual(`${block}`);
+});
+
+test(`addClass edge case, undefined.`, () => {
   const block = 'Block';
   const customClassName = undefined;
   const bem = new BemIt(block);
@@ -262,7 +270,7 @@ test(`Edge case, addClass undefined.`, () => {
   expect(className).toEqual(`${block}`);
 });
 
-test(`Edge case, addClass string spaces only.`, () => {
+test(`addClass edge case, spaces only.`, () => {
   const block = 'Block';
   const customClassName = '  ';
   const bem = new BemIt(block);
